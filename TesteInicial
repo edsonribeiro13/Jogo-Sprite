@@ -1,0 +1,141 @@
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.util.Map;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Dvd extends JFrame implements KeyListener{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	JFrame frame = new JFrame();
+	JLabel label = new JLabel();
+	BufferedImage img = new ImgUtils().scaleImage(50,50,"C:\\Users\\UESB-USR\\eclipse-workspace\\TelaDvd\\src\\download.png");
+	JPanel panel = new JPanel();
+	char pulo;
+	
+	public Dvd() {
+		label.setBounds(100, 100, 50, 50);
+		
+		label.setIcon(new ImageIcon(img));
+		
+		panel.setBackground(Color.BLACK);
+		panel.setLayout(null);
+		panel.setSize(700, 700);
+		panel.add(label);
+		panel.setVisible(true);
+		
+		frame.setVisible(true);
+		frame.setSize(700, 700);
+		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setContentPane(panel);
+		
+		frame.addKeyListener(this);
+		
+		while(true) {
+			System.out.println(pulo);
+			if(pulo == 'w') {
+				System.out.println("teste 2");
+				pulo();
+				pulo = '5';
+			}
+		}
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stu
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			label.setLocation(label.getLocation().x + 3, label.getLocation().y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_A){
+			label.setLocation(label.getLocation().x - 3, label.getLocation().y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_S) {
+			label.setLocation(label.getLocation().x, label.getLocation().y + 2);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_W){
+			System.out.println("teste 1");
+			pulo = 'w';
+		}
+		
+		/*try {
+			Thread.sleep(10);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+	}
+	
+	public static void main (String[] args) {
+		
+		new Dvd();
+		
+	}
+	
+	public static class ImgUtils {
+
+		public BufferedImage scaleImage(int WIDTH, int HEIGHT, String filename) {
+		    BufferedImage bi = null;
+		    try {
+		        ImageIcon ii = new ImageIcon(filename);//path to image
+		        bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		        Graphics2D g2d = (Graphics2D) bi.createGraphics();
+		        g2d.addRenderingHints((Map<?, ?>) new RenderingHints(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY));
+		        g2d.drawImage(ii.getImage(), 0, 0, WIDTH, HEIGHT, null);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        return null;
+		    }
+		    return bi;
+		}
+
+		 }
+	public void pulo() {
+		for (int i = 0 ; i < 15; i++) {
+			try {
+				label.setLocation(label.getLocation().x, label.getLocation().y - 1);
+				Thread.sleep(10);
+				repaint();
+				validate();
+				System.out.println("teste");
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		for (int i = 0 ; i < 15; i++) {
+			try {
+				label.setLocation(label.getLocation().x, label.getLocation().y + 1);
+				Thread.sleep(10);
+				repaint();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
+}
+
