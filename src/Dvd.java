@@ -1,3 +1,4 @@
+package src;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -20,19 +21,20 @@ public class Dvd extends JFrame implements KeyListener{
 	
 	JFrame frame = new JFrame();
 	JLabel label = new JLabel();
-	BufferedImage img = new ImgUtils().scaleImage(50,50,"C:\\Users\\UESB-USR\\eclipse-workspace\\TelaDvd\\src\\download.png");
+	BufferedImage img1 = new ImgUtils().scaleImage(50,50,"sprites1.png");
+	BufferedImage img2 = new ImgUtils().scaleImage(50,50,"sprites2.png");
 	JPanel panel = new JPanel();
 	char pulo;
 	
 	public Dvd() {
 		label.setBounds(100, 100, 50, 50);
 		
-		label.setIcon(new ImageIcon(img));
-		
-		panel.setBackground(Color.BLACK);
+		label.setIcon(new ImageIcon(img1));
+
 		panel.setLayout(null);
 		panel.setSize(700, 700);
 		panel.add(label);
+		panel.setBackground(Color.BLACK);
 		panel.setVisible(true);
 		
 		frame.setVisible(true);
@@ -42,14 +44,36 @@ public class Dvd extends JFrame implements KeyListener{
 		frame.setContentPane(panel);
 		
 		frame.addKeyListener(this);
-		
+		float speed = 0;
 		while(true) {
-			System.out.println(pulo);
-			if(pulo == 'w') {
-				System.out.println("teste 2");
-				pulo();
-				pulo = '5';
+			//gravidade
+			try {
+
+				Thread.sleep(10);
+				speed += (1 * 0.0333333333333);
+				label.setLocation(label.getLocation().x, Math.round(label.getY() + speed));
+				System.out.println(label.getY());
+
+				if(pulo == 'w') {
+					label.setIcon(new ImageIcon(img2));
+					pulo();
+					label.setIcon(new ImageIcon(img1));
+					pulo = '5';
+				}
+				if (label.getY() > 500)
+				{
+					label.setLocation(label.getX(), 500);
+					speed = 0;
+				}
+
+			} catch (InterruptedException e1) {
+
+				e1.printStackTrace();
 			}
+			
+
+
+			
 		}
 		
 	}
@@ -73,10 +97,13 @@ public class Dvd extends JFrame implements KeyListener{
 			label.setLocation(label.getLocation().x - 3, label.getLocation().y);
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_S) {
+			
 			label.setLocation(label.getLocation().x, label.getLocation().y + 2);
+
+			
+			
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_W){
-			System.out.println("teste 1");
 			pulo = 'w';
 		}
 		
@@ -113,29 +140,22 @@ public class Dvd extends JFrame implements KeyListener{
 
 		 }
 	public void pulo() {
+		float vlc = 0;
+		
+		System.out.println(label.getY());
 		for (int i = 0 ; i < 15; i++) {
 			try {
-				label.setLocation(label.getLocation().x, label.getLocation().y - 1);
+				vlc += -(10 * 0.0333333333333);
+				label.setLocation(label.getLocation().x, Math.round(label.getY() + vlc));
 				Thread.sleep(10);
 				repaint();
-				validate();
-				System.out.println("teste");
+				
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
+
 				e1.printStackTrace();
 			}
 		}
-		for (int i = 0 ; i < 15; i++) {
-			try {
-				label.setLocation(label.getLocation().x, label.getLocation().y + 1);
-				Thread.sleep(10);
-				repaint();
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
+		System.out.println(label.getY());
 	}
 
 }
-
