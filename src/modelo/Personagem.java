@@ -8,8 +8,16 @@ public class Personagem {
     private int vida; //1 a 25
     private int overall; //4 a 100
     private String nome;
+    private String pastaPersonagem;
 
-    public int getPower() {
+    public String getPastaPersonagem() {
+		return pastaPersonagem;
+	}
+	public void setPastaPersonagem(String pastaPersonagem) {
+		this.pastaPersonagem = pastaPersonagem;
+	}
+
+	public int getPower() {
         return power;
     }
     public void setPower(int power) {
