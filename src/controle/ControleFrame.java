@@ -4,12 +4,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.concurrent.Executor;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import src.visao.JogadorUm;
 import src.visao.TelaIni;
 import src.visao.JogadorDois;
-public class ControleFrame extends JFrame implements KeyListener, MouseListener{
+public class ControleFrame extends JFrame implements KeyListener, MouseListener, Executor, Runnable{
 
     private static JogadorUm playUm = new JogadorUm();
     private static JogadorDois playDois = new JogadorDois();
@@ -34,6 +36,11 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		new ControleFrame();
 	}
 
+	@Override
+	public void execute(Runnable command) {
+		// TODO Auto-generated method stub
+		
+	}
 
     public void pulo() {
 		float vlc = 0;
@@ -113,8 +120,6 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -154,6 +159,12 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
 		// TODO Auto-generated method stub
 		
 	}
