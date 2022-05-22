@@ -2,40 +2,32 @@ package src.modelo;
 
 public class Personagem {
 
-    private int power; //1 a 25
-    private int dash; //1 a 25
-    private int mana; //1 a 25
-    private int vida; //1 a 25
-    private int overall; //4 a 100
+    private int chute; //1 a 25
+    private int soco; //1 a 25
+    private int vida; //1 a 150
+    private static int overall; //3 a 100
     private String nome;
-    private String pastaPersonagem;
 
-    public String getPastaPersonagem() {
-		return pastaPersonagem;
-	}
-	public void setPastaPersonagem(String pastaPersonagem) {
-		this.pastaPersonagem = pastaPersonagem;
-	}
-
-	public int getPower() {
-        return power;
-    }
-    public void setPower(int power) {
-        this.power = power;
+	public Personagem(int chute, int soco, int vida, int overall, String nome) {
+        this.chute = chute;
+        this.soco = soco;
+        this.vida = vida;
+        Personagem.overall = overall;
+        this.nome = nome;
     }
 
-    public int getDash() {
-        return dash;
+    public int getChute() {
+        return chute;
     }
-    public void setDash(int dash) {
-        this.dash = dash;
+    public void setChute(int chute) {
+        this.chute = chute;
     }
 
-    public int getMana() {
-        return mana;
+    public int getsoco() {
+        return soco;
     }
-    public void setMana(int mana) {
-        this.mana = mana;
+    public void setsoco(int soco) {
+        this.soco = soco;
     }
 
     public int getVida() {
@@ -45,10 +37,10 @@ public class Personagem {
         this.vida = vida;
     }
 
-    public void setOverall(int dash, int mana, int power, int vida){
-        this.overall = dash + mana + power + vida;
+    public void setOverall(int soco, int chute, int vida){
+        Personagem.overall = soco + chute + vida;
     }
-    public int getOverall(){
+    public static int getOverall(){
         return overall;
     }
 

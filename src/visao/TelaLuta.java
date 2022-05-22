@@ -8,7 +8,7 @@ public class TelaLuta {
     BufferedImage imgBackground = new Utils.ImgUtils().scaleImage(750,750,"../utils/UESB.jpeg");
     private static JPanel panel = new JPanel();
 
-    public JPanel criarTela(){
+    public static JPanel criarTela(){
         //Adicionar Background
         panel.add(ControleFrame.getPlayUm());
         panel.add(ControleFrame.getPlayDois());
