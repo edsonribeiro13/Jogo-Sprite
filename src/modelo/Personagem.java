@@ -8,6 +8,10 @@ public class Personagem {
     private static int overall; //3 a 100
     private String nome;
 
+    public Personagem(){
+        
+    }
+
 	public Personagem(int chute, int soco, int vida, int overall, String nome) {
         this.chute = chute;
         this.soco = soco;

@@ -4,11 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.concurrent.Executor;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
 import src.modelo.Personagem;
 import src.visao.Jogador;
 import src.visao.TelaIni;
@@ -17,11 +13,25 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 
     private static Jogador playUm = new Jogador();
     private static Jogador playDois = new Jogador();
-	private static Personagem personagemUm;
-	private static Personagem personagemDois;
+	private static Personagem personagemUm = new Personagem();
+	private static Personagem personagemDois = new Personagem();
 	private static int clique = 0;
-    private static char pulo = '0';
-	private static char pulo2 = '0';
+	private static int acao1 = 0;
+	private static int acao2 = 0;
+	private static Runnable jogador1 = new Runnable() {
+		public void run() {
+			try{
+				controleEventos1(acao1);
+			} catch (Exception e){}
+		}
+	};
+	private static Runnable jogador2 = new Runnable() {
+		public void run() {
+			try{
+				controleEventos2(acao2);
+			} catch (Exception e){}
+		}
+	};
 
     public ControleFrame(){
 
@@ -32,79 +42,18 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
         this.addKeyListener(this);
         this.addMouseListener(this);
 
-        while(true){
-
-			float speed = 0, speed2 = 0;
-
-            try {
-
-				Thread.sleep(10);
-				speed += (1 * 0.0333333333333);
-				playUm.setLocation(playUm.getLocation().x, Math.round(playUm.getY() + speed));
-
-				if(pulo == 'w') {
-					playUm = Jogador.pular();
-					pulo();
-					playUm = Jogador.andar();
-					pulo = '5';
-				}
-				if (playUm.getY() > 500)
-				{
-					playUm.setLocation(playUm.getX(), 500);
-					speed = 0;
-				}
-
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
-
-			try {
-
-				Thread.sleep(10);
-				speed2 += (1 * 0.0333333333333);
-				playDois.setLocation(playDois.getLocation().x, Math.round(playDois.getY() + speed2));
-
-				if(pulo2 == 'w') {
-					playDois = Jogador.pular();
-					pulo();
-					playDois = Jogador.andar();
-					pulo2 = '5';
-				}
-				if (playDois.getY() > 500)
-				{
-					playDois.setLocation(playDois.getX(), 500);
-					speed2 = 0;
-				}
-
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
-        }
-
     }
 
     public static void main (String[] args) {
 		new ControleFrame();
+		while(true){
+			executaThread();
+		}
 	}
 
-    public void pulo() {
-		float vlc = 0;
-		
-		for (int i = 0 ; i < 15; i++) {
-			try {
-				vlc += -(10 * 0.0333333333333);
-				playUm.setLocation(playUm.getLocation().x, Math.round(playUm.getY() + vlc));
-				Thread.sleep(10);
-				repaint();
-				
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
-		}
-		
+	public static void executaThread(){
+		jogador1.run();
+		jogador2.run();
 	}
     
 	public static Jogador getPlayUm() {
@@ -119,121 +68,73 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	public static void setPlayDois(Jogador playDois) {
 		ControleFrame.playDois = playDois;
 	}
-
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+	public static Runnable getJogador1(){
+		return jogador1;
 	}
+	public static Runnable getJogador2(){
+		return jogador2;
+	}
+
+	public static void setAcao1(){
+		ControleFrame.acao1 = 0;
+	}
+
+	public static void setAcao2(){
+		ControleFrame.acao2 = 0;
+	}
+
+	public static void controleEventos1(int acao){
+		EventosJogador1.eventosJogador1(acao);
+	}
+
+	public static void controleEventos2(int acao){
+		EventosJogador2.eventosJogador2(acao);
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
         //Eventos Jogador 1
 		if (e.getKeyCode() == KeyEvent.VK_D) {
-			playUm.setLocation(playUm.getLocation().x + 5, playUm.getLocation().y);
-			if(playUm.getSprit_andar_control() < 9)
-			{
-				playUm.setIcon(new ImageIcon(Jogador.getAndarSprites()[playUm.getSprit_andar_control()]));
-				playUm.setSprit_andar_control(playUm.getSprit_andar_control() + 1);
-			}else
-			{
-
-				playUm.setSprit_andar_control(0);
-				playUm.setIcon(new ImageIcon(Jogador.getAndarSprites()[playUm.getSprit_andar_control()]));
-				
-			}
-
+			acao1 = 1;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_A){
-			playUm.setLocation(playUm.getLocation().x - 5, playUm.getLocation().y);
+			acao1 = 2;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_S) {
-			
-			playUm.setLocation(playUm.getLocation().x, playUm.getLocation().y + 5);
-			
+			acao1 = 3;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_W){
-			pulo = 'w';
+			acao1 = 4;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_Q){
-			Runnable jogador = new Runnable() {
-				public void run() {
-					try{
-						EventosJogador2.eventosJogador2(0);
-					} catch (Exception e){}
-				}
-			};
-			ControleThread.soco(jogador);
+			acao1 = 5;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_E){
-			Runnable jogador = new Runnable() {
-				public void run() {
-					try{
-						EventosJogador2.eventosJogador2(0);
-					} catch (Exception e){}
-				}
-			};
-			ControleThread.chute(jogador);
+			acao1 = 6;
 		}
 		//Eventos jogador dois
         else if (e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
-			playDois.setLocation(playDois.getLocation().x + 5, playDois.getLocation().y);
-			if(playDois.getSprit_andar_control() < 9)
-			{
-				playDois.setIcon(new ImageIcon(Jogador.getAndarSprites()[playDois.getSprit_andar_control()]));
-				playDois.setSprit_andar_control(playDois.getSprit_andar_control() + 1);
-			}else
-			{
-
-				playDois.setSprit_andar_control(0);
-				playDois.setIcon(new ImageIcon(Jogador.getAndarSprites()[playDois.getSprit_andar_control()]));
-				
-			}
-
+			acao2 = 1;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			playDois.setLocation(playDois.getLocation().x - 5, playDois.getLocation().y);
+			acao2 = 2;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			
-			playDois.setLocation(playDois.getLocation().x, playDois.getLocation().y + 5);
-			
+			acao2 = 3;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_UP){
-			pulo2 = 'w';
+			acao2 = 4;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_SHIFT){
-			Runnable jogador = new Runnable() {
-				public void run() {
-					try{
-						EventosJogador1.eventosJogador1(0);
-					} catch (Exception e){}
-				}
-			};
-			ControleThread.soco(jogador);
+			acao2 = 5;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_SEMICOLON){
-			Runnable jogador = new Runnable() {
-				public void run() {
-					try{
-						EventosJogador1.eventosJogador1(0);
-					} catch (Exception e){}
-				}
-			};
-			ControleThread.chute(jogador);
+			acao2 = 6;
 		}
 		
 	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getSource() == TelaIni.getLabel1()){
@@ -275,6 +176,23 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 			this.setContentPane(TelaLuta.criarTela());
         }
 
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
