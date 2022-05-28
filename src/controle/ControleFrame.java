@@ -38,7 +38,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setContentPane(TelaIni.criarTela());
+		this.setContentPane(TelaLuta.criarTela());
         this.addKeyListener(this);
         this.addMouseListener(this);
 
