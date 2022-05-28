@@ -1,7 +1,10 @@
 package src.controle;
 
 import javax.swing.ImageIcon;
-import src.visao.Jogador;
+import javax.swing.JLabel;
+
+import src.visao.Jogador2;
+import src.visao.TelaLuta;
 
 public class EventosJogador2 {
     public static void eventosJogador2(int opc){
@@ -10,13 +13,13 @@ public class EventosJogador2 {
                                                     ControleFrame.getPlayDois().getLocation().y);
             if(ControleFrame.getPlayDois().getSprit_andar_control() < 9)
             {
-                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
+                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
                 ControleFrame.getPlayDois().setSprit_andar_control(ControleFrame.getPlayDois().getSprit_andar_control() + 1);
             }else
             {
 
                 ControleFrame.getPlayDois().setSprit_andar_control(0);
-                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
+                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
                 
             }
         }
@@ -24,13 +27,13 @@ public class EventosJogador2 {
             ControleFrame.getPlayDois().setLocation( ControleFrame.getPlayDois().getLocation().x - 5,  ControleFrame.getPlayDois().getLocation().y);
             if(ControleFrame.getPlayDois().getSprit_andar_control() > 0)
             {
-                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
+                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
                 ControleFrame.getPlayDois().setSprit_andar_control(ControleFrame.getPlayDois().getSprit_andar_control() - 1);
             }else
             {
 
                 ControleFrame.getPlayDois().setSprit_andar_control(9);
-                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
+                ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
                 
             }
         }
@@ -40,7 +43,7 @@ public class EventosJogador2 {
         else if (opc == 4){
             float vlc = 0;
 
-            ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getPularSprite()));
+            ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getPularSprite()));
 		
             for (int i = 0 ; i < 15; i++) {
                 try {
@@ -60,7 +63,7 @@ public class EventosJogador2 {
                 try {
                     vlc += -(10 * 0.0333333333333);
                     ControleFrame.getPlayDois().setSprit_soco_controll(i);
-                    ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getSocarSprites()
+                    ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getSocarSprites()
                                                       [ControleFrame.getPlayDois().getSprit_andar_control()]));
                     ControleFrame.getPlayDois().setLocation(Math.round(ControleFrame.getPlayDois().getX() + vlc), 
                                                         ControleFrame.getPlayDois().getY());
@@ -72,7 +75,7 @@ public class EventosJogador2 {
             }
             soco(ControleFrame.getJogador2());
             ControleFrame.getPlayDois().setSprit_andar_control(0);
-            ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
+            ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
         }
         else if (opc == 6){
             float vlc = 0;
@@ -80,7 +83,7 @@ public class EventosJogador2 {
                 try {
                     vlc += -(10 * 0.0333333333333);
                     ControleFrame.getPlayDois().setSprit_chute_control(i);
-                    ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getSocarSprites()
+                    ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getSocarSprites()
                                                       [ControleFrame.getPlayDois().getSprit_chute_control()]));
                     ControleFrame.getPlayDois().setLocation(Math.round(ControleFrame.getPlayDois().getX() + vlc), 
                                                         ControleFrame.getPlayDois().getY());
@@ -91,7 +94,7 @@ public class EventosJogador2 {
                 }
             }
             ControleFrame.getPlayDois().setSprit_andar_control(0);
-            ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
+            ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getAndarSprites()[ControleFrame.getPlayDois().getSprit_andar_control()]));
             chute(ControleFrame.getJogador2());
         }
         ControleFrame.setAcao2();
@@ -120,4 +123,34 @@ public class EventosJogador2 {
         }
         jogador.notify();
     }
+
+    public int colision_check(JLabel LA, JLabel LB)
+		{
+			//Coleta informações do primeiro jogador
+			int label_A_x = LA.getX();
+			int label_A_y = LA.getY();
+			int label_A_h = LA.getHeight();
+			int label_A_w = LA.getWidth();
+
+			//Coleta informações do segundo
+			int label_B_x = LB.getX();
+			int label_B_y= LB.getY();
+			int label_B_h = LB.getHeight();
+			int label_B_w = LB.getWidth();
+
+			//Realiza as verificações para ver se existi colisão
+			if (label_A_x < label_B_x + label_B_w &&
+			label_A_x + label_A_w > label_B_x &&
+			label_A_y < label_B_y + label_B_h &&
+			label_A_y + label_A_h > label_B_y) {
+				//Houve colisão
+
+				TelaLuta.getLifebar1().setSize(TelaLuta.getLifebar1().getWidth()-1, TelaLuta.getLifebar1().getHeight());
+				return 1;
+			}
+			//não houve colisão
+			return 0;
+
+	}
+
 }

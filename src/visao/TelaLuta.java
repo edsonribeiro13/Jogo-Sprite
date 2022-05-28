@@ -36,4 +36,12 @@ public class TelaLuta {
         return panel;
     }
 
+    public static JLabel getLifebar1(){
+        return lifeBar1;
+    }
+
+    public static JLabel getLifebar2(){
+        return lifeBar2;
+    }
+
 }

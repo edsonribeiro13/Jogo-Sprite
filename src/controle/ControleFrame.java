@@ -6,13 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import src.modelo.Personagem;
-import src.visao.Jogador;
+import src.visao.Jogador1;
+import src.visao.Jogador2;
 import src.visao.TelaIni;
 import src.visao.TelaLuta;
 public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 
-    private static Jogador playUm = new Jogador();
-    private static Jogador playDois = new Jogador();
+    private static Jogador1 playUm = new Jogador1();
+    private static Jogador2 playDois = new Jogador2();
 	private static Personagem personagemUm = new Personagem();
 	private static Personagem personagemDois = new Personagem();
 	private static int clique = 0;
@@ -38,7 +39,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setContentPane(TelaLuta.criarTela());
+		this.setContentPane(TelaIni.criarTela());
         this.addKeyListener(this);
         this.addMouseListener(this);
 
@@ -46,9 +47,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 
     public static void main (String[] args) {
 		new ControleFrame();
-		while(true){
-			executaThread();
-		}
+		executaThread();
 	}
 
 	public static void executaThread(){
@@ -56,16 +55,16 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		jogador2.run();
 	}
     
-	public static Jogador getPlayUm() {
+	public static Jogador1 getPlayUm() {
 		return playUm;
 	}
-	public static void setPlayUm(Jogador playUm) {
+	public static void setPlayUm(Jogador1 playUm) {
 		ControleFrame.playUm = playUm;
 	}
-	public static Jogador getPlayDois() {
+	public static Jogador2 getPlayDois() {
 		return playDois;
 	}
-	public static void setPlayDois(Jogador playDois) {
+	public static void setPlayDois(Jogador2 playDois) {
 		ControleFrame.playDois = playDois;
 	}
 	public static Runnable getJogador1(){
@@ -73,6 +72,14 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	}
 	public static Runnable getJogador2(){
 		return jogador2;
+	}
+
+	public static Personagem getPersonagem1(){
+		return personagemUm;
+	}
+
+	public static Personagem getPersonagem2(){
+		return personagemDois;
 	}
 
 	public static void setAcao1(){
