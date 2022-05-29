@@ -9,9 +9,10 @@ import src.visao.TelaLuta;
 public class EventosJogador1 {
     public static void eventosJogador1(int opc){
         if (opc == 1){
-            ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x + 5, 
+            if (ControleFrame.getPlayUm().getLocation().x < 720) 
+                ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x + 5, 
                                                     ControleFrame.getPlayUm().getLocation().y);
-            if(ControleFrame.getPlayUm().getSprit_andar_control() < 9)
+            if(ControleFrame.getPlayUm().getSprit_andar_control() >= 0 && ControleFrame.getPlayUm().getSprit_andar_control() < 9)
             {
                 ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
                 ControleFrame.getPlayUm().setSprit_andar_control(ControleFrame.getPlayUm().getSprit_andar_control() + 1);
@@ -24,21 +25,23 @@ public class EventosJogador1 {
             }
         }
         else if (opc == 2){
-            ControleFrame.getPlayUm().setLocation( ControleFrame.getPlayUm().getLocation().x - 5,  ControleFrame.getPlayUm().getLocation().y);
-            if(ControleFrame.getPlayUm().getSprit_andar_control() > 0)
+            if (ControleFrame.getPlayUm().getLocation().x > 80) 
+                ControleFrame.getPlayUm().setLocation( ControleFrame.getPlayUm().getLocation().x - 5,  
+                                                      ControleFrame.getPlayUm().getLocation().y);
+            if(ControleFrame.getPlayUm().getSprit_andar_control() >= 0 && ControleFrame.getPlayUm().getSprit_andar_control() < 9)
             {
                 ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
                 ControleFrame.getPlayUm().setSprit_andar_control(ControleFrame.getPlayUm().getSprit_andar_control() - 1);
             }else
             {
 
-                ControleFrame.getPlayUm().setSprit_andar_control(9);
+                ControleFrame.getPlayUm().setSprit_andar_control(8);
                 ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
                 
             }
         }
         else if (opc == 3){
-            ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x, ControleFrame.getPlayUm().getLocation().y + 5);
+            //ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x, ControleFrame.getPlayUm().getLocation().y + 5);
         }
         else if (opc == 4){
             float vlc = 0;
@@ -56,6 +59,18 @@ public class EventosJogador1 {
                     e1.printStackTrace();
                 }
             }
+            vlc = 0;
+            for (int i = 0 ; i < 15; i++) {
+                try {
+                    vlc += (10 * 0.0333333333333);
+                    ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x, 
+                                                        Math.round(ControleFrame.getPlayUm().getY() + vlc));
+                    Thread.sleep(10);
+                } catch (InterruptedException e1) {
+
+                    e1.printStackTrace();
+                }
+            }
             ControleFrame.getPlayUm().setSprit_andar_control(0);
             ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
         }
@@ -63,10 +78,9 @@ public class EventosJogador1 {
             float vlc = 0;
             for (int i = 0 ; i < 3; i++) {
                 try {
-                    vlc += -(10 * 0.0333333333333);
+                    vlc += (10 * 0.0333333333333);
                     ControleFrame.getPlayUm().setSprit_soco_controll(i);
-                    ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()
-                                                      [ControleFrame.getPlayUm().getSprit_andar_control()]));
+                    ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()[i]));
                     ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + vlc), 
                                                         ControleFrame.getPlayUm().getY());
                     Thread.sleep(10);
@@ -83,10 +97,9 @@ public class EventosJogador1 {
             float vlc = 0;
             for (int i = 0 ; i < 3; i++) {
                 try {
-                    vlc += -(10 * 0.0333333333333);
+                    vlc += (10 * 0.0333333333333);
                     ControleFrame.getPlayUm().setSprit_chute_control(i);
-                    ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()
-                                                      [ControleFrame.getPlayUm().getSprit_chute_control()]));
+                    ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()[i]));
                     ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + vlc), 
                                                         ControleFrame.getPlayUm().getY());
                     Thread.sleep(10);

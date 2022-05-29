@@ -49,7 +49,6 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 
     public static void main (String[] args) {
 		new ControleFrame();
-		executaThread();
 	}
 
 	public static void executaThread(){
@@ -60,6 +59,8 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	public static Jogador1 getPlayUm() {
 		if (playUm == null){
 			playUm = new Jogador1();
+			Jogador1.andar(playUm);
+			playUm.setBounds(0, 400, 80, 80);
 		}
 		return playUm;
 	}
@@ -69,6 +70,8 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	public static Jogador2 getPlayDois() {
 		if (playDois == null){
 			playDois = new Jogador2();
+			Jogador2.andar(playDois);
+			playDois.setBounds(400, 400, 80, 80);
 		}
 		return playDois;
 	}
@@ -109,6 +112,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
         //Eventos Jogador 1
+		executaThread();
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			acao1 = 1;
 		}
@@ -123,16 +127,18 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_Q){
 			acao1 = 5;
+			repaint();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_E){
 			acao1 = 6;
+			repaint();
 		}
 		//Eventos jogador dois
-        else if (e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
-			acao2 = 1;
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			acao2 = 2;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			acao2 = 2;
+			acao2 = 1;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 			acao2 = 3;
@@ -142,9 +148,11 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_SHIFT){
 			acao2 = 5;
+			repaint();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_SEMICOLON){
 			acao2 = 6;
+			repaint();
 		}
 		
 	}
