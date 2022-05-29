@@ -109,9 +109,8 @@ public class EventosJogador1 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (ControleFrame.getPlayUm().getX() == ControleFrame.getPlayDois().getX()){
-            System.out.println("HIT");
-        }
+        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(),
+                        ControleFrame.getPersonagem1().getsoco());
         jogador.notify();
     }
 
@@ -122,13 +121,12 @@ public class EventosJogador1 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (ControleFrame.getPlayUm().getX() == ControleFrame.getPlayDois().getX()){
-            System.out.println("HIT");
-        }
+        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(),
+                        ControleFrame.getPersonagem1().getChute());
         jogador.notify();
     }
 
-    public int colision_check(JLabel LA, JLabel LB)
+    public static void colision_check(JLabel LA, JLabel LB, int forca)
 		{
 			//Coleta informações do primeiro jogador
 			int label_A_x = LA.getX();
@@ -149,11 +147,8 @@ public class EventosJogador1 {
 			label_A_y + label_A_h > label_B_y) {
 				//Houve colisão
 
-				TelaLuta.getLifebar2().setSize(TelaLuta.getLifebar2().getWidth()-1, TelaLuta.getLifebar2().getHeight());
-				return 1;
+				TelaLuta.getLifebar2().setSize(TelaLuta.getLifebar2().getWidth() - forca, TelaLuta.getLifebar2().getHeight());
 			}
-			//não houve colisão
-			return 0;
 
 	}
 

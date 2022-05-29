@@ -16,7 +16,7 @@ public class Jogador1 extends JLabel{
     {
 
         label = new JLabel();
-        label.setBounds(100, 100, 100, 100);
+        label.setBounds(0, 500, 100, 100);
 
     }
 
@@ -73,31 +73,31 @@ public class Jogador1 extends JLabel{
     }
 
     static BufferedImage[] andarSprites = {
-        new Utils.ImgUtils().scaleImage(100,100,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar1.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar2.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar3.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar4.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar5.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar6.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar7.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar8.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Andar9.png")
+        new Utils.ImgUtils().scaleImage(100,100,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar1.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar2.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar3.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar4.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar5.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar6.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar7.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar8.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Andar9.png")
     };
 
     static BufferedImage pularSprite = new Utils.ImgUtils().scaleImage(100,100,
-                                                                        "../utils/" + ControleFrame.getPersonagem1().getNome()+ "Pulo.png");
+                                                                        "src//utils/" + ControleFrame.getPersonagem1().getNome()+ "Pulo.png");
 
     static BufferedImage[] socarSprites = {
-        new Utils.ImgUtils().scaleImage(100,100,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Soco1.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Soco2.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Soco3.png")
+        new Utils.ImgUtils().scaleImage(100,100,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Soco1.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Soco2.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Soco3.png")
     };
 
     static BufferedImage[] chutarSprites = {
-        new Utils.ImgUtils().scaleImage(100,100,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Chute1.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Chute2.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Chute3.png"),
-        new Utils.ImgUtils().scaleImage(50,50,"../utils/" + ControleFrame.getPersonagem1().getNome() + "Chute4.png")
+        new Utils.ImgUtils().scaleImage(100,100,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Chute1.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Chute2.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Chute3.png"),
+        new Utils.ImgUtils().scaleImage(50,50,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Chute4.png")
     };
 
     public static BufferedImage[] getAndarSprites() {

@@ -12,10 +12,10 @@ import src.visao.TelaIni;
 import src.visao.TelaLuta;
 public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 
-    private static Jogador1 playUm = new Jogador1();
-    private static Jogador2 playDois = new Jogador2();
-	private static Personagem personagemUm = new Personagem();
-	private static Personagem personagemDois = new Personagem();
+    private static Jogador1 playUm;
+    private static Jogador2 playDois;
+	private static Personagem personagemUm;
+	private static Personagem personagemDois;
 	private static int clique = 0;
 	private static int acao1 = 0;
 	private static int acao2 = 0;
@@ -37,9 +37,11 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
     public ControleFrame(){
 
         this.setVisible(true);
+		this.setSize(800, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(TelaIni.criarTela());
+		repaint();
         this.addKeyListener(this);
         this.addMouseListener(this);
 
@@ -56,12 +58,18 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	}
     
 	public static Jogador1 getPlayUm() {
+		if (playUm == null){
+			playUm = new Jogador1();
+		}
 		return playUm;
 	}
 	public static void setPlayUm(Jogador1 playUm) {
 		ControleFrame.playUm = playUm;
 	}
 	public static Jogador2 getPlayDois() {
+		if (playDois == null){
+			playDois = new Jogador2();
+		}
 		return playDois;
 	}
 	public static void setPlayDois(Jogador2 playDois) {
@@ -141,10 +149,9 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		
 	}
 
-
 	@Override
-	public void mousePressed(MouseEvent e) {
-		if(e.getSource() == TelaIni.getLabel1()){
+	public void mouseClicked(MouseEvent e) {
+		if(e.getX() >= 300 && e.getX() <= 400 && e.getY() >= 250 && e.getY() <= 350){
 			if (clique == 0){
 				personagemUm = new Personagem(15, 20, 120, Personagem.getOverall(), "P1");
 			}
@@ -153,7 +160,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 			}
 			clique += 1;
         }
-        else if(e.getSource() == TelaIni.getLabel2()){
+        else if(e.getX() >= 410 && e.getX() <= 560 && e.getY() >= 250 && e.getY() <= 350){
 			if (clique == 0){
 				personagemUm = new Personagem(20, 5, 100, Personagem.getOverall(), "P2");
 			}
@@ -162,7 +169,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 			}
 			clique += 1;
         }
-        else if(e.getSource() == TelaIni.getLabel3()){
+        else if(e.getX() >= 300 && e.getX() <= 400 && e.getY() >= 360 && e.getY() <= 470){
 			if (clique == 0){
 				personagemUm = new Personagem(25, 10, 170, Personagem.getOverall(), "P3");
 			}
@@ -171,7 +178,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 			}
 			clique += 1;
         }
-        else if(e.getSource() == TelaIni.getLabel4()){
+        else if(e.getX() >= 410 && e.getX() <= 560 && e.getY() >= 360 && e.getY() <= 470){
 			if (clique == 0){
 				personagemUm = new Personagem(5, 25, 150, Personagem.getOverall(), "P4");
 			}
@@ -179,20 +186,21 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 				personagemDois = new Personagem(5, 25, 150, Personagem.getOverall(), "P4");
 			}
 			clique += 1;
-		if (clique == 2)
-			this.setContentPane(TelaLuta.criarTela());
         }
+		if (clique == 2){
+			this.setContentPane(TelaLuta.criarTela());
+			repaint();
+		}
 
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
 	}
 
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
