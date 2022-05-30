@@ -175,7 +175,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 				personagemUm = new Personagem(15, 20, 120, Personagem.getOverall(), "P1");
 			}
 			else{
-				personagemDois = new Personagem(15, 20, 120, Personagem.getOverall(), "P1");
+				personagemDois = new Personagem(15, 20, 120, Personagem.getOverall(), "P1LadoB");
 			}
 			clique += 1;
         }
@@ -184,7 +184,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 				personagemUm = new Personagem(20, 5, 100, Personagem.getOverall(), "P2");
 			}
 			else{
-				personagemDois = new Personagem(20, 5, 100, Personagem.getOverall(), "P2");
+				personagemDois = new Personagem(20, 5, 100, Personagem.getOverall(), "P2LadoB");
 			}
 			clique += 1;
         }
@@ -193,7 +193,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 				personagemUm = new Personagem(25, 10, 170, Personagem.getOverall(), "P3");
 			}
 			else{
-				personagemDois = new Personagem(25, 10, 170, Personagem.getOverall(), "P3");
+				personagemDois = new Personagem(25, 10, 170, Personagem.getOverall(), "P3LadoB");
 			}
 			clique += 1;
         }
@@ -202,7 +202,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 				personagemUm = new Personagem(5, 25, 150, Personagem.getOverall(), "P4");
 			}
 			else{
-				personagemDois = new Personagem(5, 25, 150, Personagem.getOverall(), "P4");
+				personagemDois = new Personagem(5, 25, 150, Personagem.getOverall(), "P4LadoB");
 			}
 			clique += 1;
         }

@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import src.visao.Jogador1;
+import src.visao.Jogador2;
 import src.visao.TelaLuta;
 
 public class EventosJogador1 {
@@ -162,7 +163,16 @@ public class EventosJogador1 {
 
 			TelaLuta.getLifebar2().setSize(TelaLuta.getLifebar2().getWidth() - forca, TelaLuta.getLifebar2().getHeight());
             if(TelaLuta.getLifebar2().getWidth() <= 0){
-                    ControleFrame.setControle();
+                for (int i = 0 ; i < 3; i++) {
+                    try {
+                        ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getMorteSprites()[i]));
+                        Thread.sleep(10);
+                    } catch (InterruptedException e1) {
+
+                        e1.printStackTrace();
+                    }
+                }
+                ControleFrame.setControle();
             }
 
 			}

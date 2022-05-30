@@ -88,6 +88,12 @@ public class Jogador2 extends JLabel{
         new Utils.ImgUtils().scaleImage(80,80,"src//utils/" + ControleFrame.getPersonagem2().getNome() + "Chute4.png")
     };
 
+    static BufferedImage[] morteSprites = {
+        new Utils.ImgUtils().scaleImage(80,80,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Morte1.png"),
+        new Utils.ImgUtils().scaleImage(80,80,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Morte2.png"),
+        new Utils.ImgUtils().scaleImage(80,80,"src//utils/" + ControleFrame.getPersonagem1().getNome() + "Morte3.png")
+    };
+
     public static BufferedImage[] getAndarSprites() {
 		return andarSprites;
 	}
@@ -102,5 +108,9 @@ public class Jogador2 extends JLabel{
 
 	public static BufferedImage[] getChutarSprites() {
 		return chutarSprites;
+	}
+
+    public static BufferedImage[] getMorteSprites() {
+		return morteSprites;
 	}
 }
