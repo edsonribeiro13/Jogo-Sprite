@@ -9,7 +9,7 @@ import src.visao.TelaLuta;
 public class EventosJogador2 {
     public static void eventosJogador2(int opc){
         if (opc == 1){
-            if (ControleFrame.getPlayDois().getLocation().x > 80)
+            if (ControleFrame.getPlayDois().getLocation().x > 0)
                 ControleFrame.getPlayDois().setLocation(ControleFrame.getPlayDois().getLocation().x - 5, 
                                                     ControleFrame.getPlayDois().getLocation().y);
             if(ControleFrame.getPlayDois().getSprit_andar_control() < 9 && ControleFrame.getPlayDois().getSprit_andar_control() >= 0)
@@ -114,28 +114,30 @@ public class EventosJogador2 {
     }
 
     public static void soco(Runnable jogador){
-        try {
-            jogador.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        synchronized(jogador){
+            try {
+                while(!colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(), ControleFrame.getPersonagem2().getsoco())){
+                    jogador.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(),
-                        ControleFrame.getPersonagem2().getsoco());
         jogador.notify();
     }
 
     public static void chute(Runnable jogador){
         try {
-            jogador.wait();
+            while(!colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(), ControleFrame.getPersonagem2().getChute())){
+                jogador.wait();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(),
-                        ControleFrame.getPersonagem2().getChute());
         jogador.notify();
     }
 
-    public static int colision_check(JLabel LA, JLabel LB, int forca)
+    public static boolean colision_check(JLabel LA, JLabel LB, int forca)
 		{
 			//Coleta informações do primeiro jogador
 			int label_A_x = LA.getX();
@@ -156,11 +158,12 @@ public class EventosJogador2 {
 			label_A_y + label_A_h > label_B_y) {
 				//Houve colisão
 
-				TelaLuta.getLifebar1().setSize(TelaLuta.getLifebar1().getWidth()-forca, TelaLuta.getLifebar1().getHeight());
-				return 1;
+			TelaLuta.getLifebar1().setSize(TelaLuta.getLifebar1().getWidth() - forca, TelaLuta.getLifebar1().getHeight());
+            if(TelaLuta.getLifebar1().getWidth() <= 0){
+                ControleFrame.setControle();
+            }
 			}
-			//não houve colisão
-			return 0;
+        return true;
 
 	}
 

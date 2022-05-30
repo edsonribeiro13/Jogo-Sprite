@@ -19,18 +19,24 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	private static int clique = 0;
 	private static int acao1 = 0;
 	private static int acao2 = 0;
+	private static boolean controle = false;
+
 	private static Runnable jogador1 = new Runnable() {
 		public void run() {
-			try{
-				controleEventos1(acao1);
-			} catch (Exception e){}
-		}
+			synchronized(this){
+				try{
+					controleEventos1(acao1);
+				} catch (Exception e){}
+			}
+		}	
 	};
 	private static Runnable jogador2 = new Runnable() {
 		public void run() {
-			try{
-				controleEventos2(acao2);
-			} catch (Exception e){}
+			synchronized(this){
+				try{
+					controleEventos2(acao2);
+				} catch (Exception e){}
+			}
 		}
 	};
 
@@ -49,6 +55,11 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 
     public static void main (String[] args) {
 		new ControleFrame();
+		while (true){
+			executaThread();
+			if(controle == true)
+				break;
+		}
 	}
 
 	public static void executaThread(){
@@ -60,7 +71,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		if (playUm == null){
 			playUm = new Jogador1();
 			Jogador1.andar(playUm);
-			playUm.setBounds(0, 400, 80, 80);
+			playUm.setBounds(0, 380, 80, 80);
 		}
 		return playUm;
 	}
@@ -71,7 +82,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		if (playDois == null){
 			playDois = new Jogador2();
 			Jogador2.andar(playDois);
-			playDois.setBounds(400, 400, 80, 80);
+			playDois.setBounds(400, 380, 80, 80);
 		}
 		return playDois;
 	}
@@ -108,11 +119,13 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	public static void controleEventos2(int acao){
 		EventosJogador2.eventosJogador2(acao);
 	}
+	public static void setControle(){
+		ControleFrame.controle = true;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
         //Eventos Jogador 1
-		executaThread();
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			acao1 = 1;
 		}
@@ -127,11 +140,9 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_Q){
 			acao1 = 5;
-			repaint();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_E){
 			acao1 = 6;
-			repaint();
 		}
 		//Eventos jogador dois
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
