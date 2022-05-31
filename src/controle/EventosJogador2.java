@@ -80,9 +80,9 @@ public class EventosJogador2 {
                     vlc += (10 * 0.0333333333333);
                     ControleFrame.getPlayDois().setSprit_soco_controll(i);
                     ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getSocarSprites()[i]));
-                    ControleFrame.getPlayDois().setLocation(Math.round(ControleFrame.getPlayDois().getX() + vlc), 
+                    ControleFrame.getPlayDois().setLocation(Math.round(ControleFrame.getPlayDois().getX() - vlc), 
                                                         ControleFrame.getPlayDois().getY());
-                    Thread.sleep(10);
+                    Thread.sleep(33);
                 } catch (InterruptedException e1) {
 
                     e1.printStackTrace();
@@ -99,9 +99,9 @@ public class EventosJogador2 {
                     vlc += (10 * 0.0333333333333);
                     ControleFrame.getPlayDois().setSprit_chute_control(i);
                     ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getSocarSprites()[i]));
-                    ControleFrame.getPlayDois().setLocation(Math.round(ControleFrame.getPlayDois().getX() + vlc), 
+                    ControleFrame.getPlayDois().setLocation(Math.round(ControleFrame.getPlayDois().getX() - vlc), 
                                                         ControleFrame.getPlayDois().getY());
-                    Thread.sleep(10);
+                    Thread.sleep(33);
                 } catch (InterruptedException e1) {
 
                     e1.printStackTrace();
@@ -115,26 +115,25 @@ public class EventosJogador2 {
     }
 
     public static void soco(Runnable jogador){
-        synchronized(jogador){
+        /*synchronized(jogador){
             try {
-                while(!colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(), ControleFrame.getPersonagem2().getsoco())){
+
                     jogador.wait();
-                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+        colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(), ControleFrame.getPersonagem2().getsoco());
         jogador.notify();
     }
 
     public static void chute(Runnable jogador){
-        try {
-            while(!colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(), ControleFrame.getPersonagem2().getChute())){
+        /*try {
                 jogador.wait();
-            }
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+        colision_check(ControleFrame.getPlayDois(), ControleFrame.getPlayUm(), ControleFrame.getPersonagem2().getChute());
         jogador.notify();
     }
 
@@ -163,8 +162,8 @@ public class EventosJogador2 {
             if(TelaLuta.getLifebar1().getWidth() <= 0){
                 for (int i = 0 ; i < 3; i++) {
                     try {
-                        ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador1.getMorteSprites()[i]));
-                        Thread.sleep(10);
+                        ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getMorteSprites()[i]));
+                        Thread.sleep(33);
                     } catch (InterruptedException e1) {
 
                         e1.printStackTrace();

@@ -4,8 +4,8 @@ public class Personagem {
 
     private int chute; //1 a 25
     private int soco; //1 a 25
-    private int vida; //1 a 150
-    private static int overall; //3 a 100
+    private int vida; //1 a 170
+    private static int overall; //3 a 200
     private String nome;
 
     public Personagem(){

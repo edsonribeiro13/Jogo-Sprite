@@ -84,7 +84,7 @@ public class EventosJogador1 {
                     ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()[i]));
                     ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + vlc), 
                                                         ControleFrame.getPlayUm().getY());
-                    Thread.sleep(10);
+                    Thread.sleep(33);
                 } catch (InterruptedException e1) {
 
                     e1.printStackTrace();
@@ -103,7 +103,7 @@ public class EventosJogador1 {
                     ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()[i]));
                     ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + vlc), 
                                                         ControleFrame.getPlayUm().getY());
-                    Thread.sleep(10);
+                    Thread.sleep(33);
                 } catch (InterruptedException e1) {
 
                     e1.printStackTrace();
@@ -117,26 +117,26 @@ public class EventosJogador1 {
     }
 
     public static void soco(Runnable jogador){
-        synchronized(jogador){
+        /*synchronized(jogador){
             try {
-                while(!colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getsoco())){
+                {
                     jogador.wait();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getsoco());
         jogador.notify();
     }
 
     public static void chute(Runnable jogador){
-        try {
-            while(!colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getChute())){
+        /*try {
                 jogador.wait();
-            }
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getChute());
         jogador.notify();
     }
 
@@ -166,7 +166,7 @@ public class EventosJogador1 {
                 for (int i = 0 ; i < 3; i++) {
                     try {
                         ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getMorteSprites()[i]));
-                        Thread.sleep(10);
+                        Thread.sleep(33);
                     } catch (InterruptedException e1) {
 
                         e1.printStackTrace();
