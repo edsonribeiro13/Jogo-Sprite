@@ -20,6 +20,14 @@ public class TelaIni {
     private static JLabel label4 = new JLabel();
     private static JPanel panel = new JPanel();
 
+
+    private static JLabel labelOverall1 = new JLabel("Points: 155");
+    private static JLabel labelOverall2 = new JLabel("Points: 125");
+    private static JLabel labelOverall3 = new JLabel("Points: 205");
+    private static JLabel labelOverall4 = new JLabel("Points: 180");
+
+    
+
     public static JPanel criarTela(){
 
         panel.setVisible(true);
@@ -38,11 +46,27 @@ public class TelaIni {
         label3.setBounds(300, 360, 100, 100);
         label4.setBounds(410, 360, 100, 100);
 
+
+        labelOverall1.setBounds(200, 250, 100, 100);
+        labelOverall2.setBounds(200, 350, 100, 100);
+        labelOverall3.setBounds(530, 250, 100, 100);
+        labelOverall4.setBounds(530, 350, 100, 100);
+
+        labelOverall1.setForeground(Color.RED);
+        labelOverall2.setForeground(Color.RED);
+        labelOverall3.setForeground(Color.RED);
+        labelOverall4.setForeground(Color.RED);
+
+
         panel.add(labelImgBackground);
         panel.add(label1);
         panel.add(label2);
         panel.add(label3);
         panel.add(label4);
+        panel.add(labelOverall1);
+        panel.add(labelOverall2);
+        panel.add(labelOverall3);
+        panel.add(labelOverall4);
         panel.setBackground(Color.DARK_GRAY);
 
         return panel;

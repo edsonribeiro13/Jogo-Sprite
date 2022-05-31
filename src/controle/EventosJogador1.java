@@ -90,6 +90,7 @@ public class EventosJogador1 {
                     e1.printStackTrace();
                 }
             }
+
             soco(ControleFrame.getJogador2());
             ControleFrame.getPlayUm().setSprit_andar_control(0);
             ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));

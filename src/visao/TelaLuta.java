@@ -21,6 +21,7 @@ public class TelaLuta {
     private static JLabel labelImgChao = new JLabel();
 
     
+    
 
     public static JPanel criarTela(){
         //Adicionar Background
