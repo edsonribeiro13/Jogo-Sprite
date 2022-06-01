@@ -213,7 +213,6 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		else if (clique == 2){
 			this.setContentPane(TelaLuta.criarTela());
 			repaint();
-			System.out.println("Player 2 selecionado.");
 		}
 		
 

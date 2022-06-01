@@ -9,8 +9,9 @@ import src.visao.TelaLuta;
 
 public class EventosJogador1 {
     public static void eventosJogador1(int opc){
+        
         if (opc == 1){
-            if (ControleFrame.getPlayUm().getLocation().x < 720) 
+            if (ControleFrame.getPlayUm().getLocation().x < 720 && ControleFrame.getPlayUm().getLocation().x  < (ControleFrame.getPlayDois().getLocation().x - ControleFrame.getPlayDois().getWidth())) 
                 ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x + 5, 
                                                     ControleFrame.getPlayUm().getLocation().y);
             if(ControleFrame.getPlayUm().getSprit_andar_control() >= 0 && ControleFrame.getPlayUm().getSprit_andar_control() < 9)
@@ -126,9 +127,11 @@ public class EventosJogador1 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
-        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getsoco());
+        }
         jogador.notify();
+        */
+        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getsoco());
+        
     }
 
     public static void chute(Runnable jogador){
@@ -136,9 +139,11 @@ public class EventosJogador1 {
                 jogador.wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
-        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getChute());
+        }
         jogador.notify();
+        */
+        colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(), ControleFrame.getPersonagem1().getChute());
+        
     }
 
     public static boolean colision_check(JLabel LA, JLabel LB, int forca)
