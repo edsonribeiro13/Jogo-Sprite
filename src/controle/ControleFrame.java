@@ -1,7 +1,6 @@
 package src.controle;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
@@ -10,37 +9,23 @@ import src.visao.Jogador1;
 import src.visao.Jogador2;
 import src.visao.TelaIni;
 import src.visao.TelaLuta;
-public class ControleFrame extends JFrame implements KeyListener, MouseListener{
+
+enum GameState {
+	SELECTPLAYER,
+	INGAME,
+	END
+};
+public class ControleFrame extends JFrame implements MouseListener{
 
     private static Jogador1 playUm;
     private static Jogador2 playDois;
 	private static Personagem personagemUm;
 	private static Personagem personagemDois;
 	private static int clique = 0;
-	private static int acao1 = 0;
-	private static int acao2 = 0;
-	private static boolean controle = false;
+	private static GameState controle = GameState.SELECTPLAYER;
+	private static KeyInput keyInput = new KeyInput();
 
-	private static Runnable jogador1 = new Runnable() {
-		public void run() {
-			synchronized(this){
-				try{
-					controleEventos1(acao1);
-				} catch (Exception e){}
-			}
-		}	
-	};
-	private static Runnable jogador2 = new Runnable() {
-		public void run() {
-			synchronized(this){
-				try{
-					controleEventos2(acao2);
-				} catch (Exception e){}
-			}
-		}
-	};
-
-    public ControleFrame(){
+	public ControleFrame(){
 
         this.setVisible(true);
 		this.setSize(800, 600);
@@ -48,24 +33,15 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(TelaIni.criarTela());
 		repaint();
-        this.addKeyListener(this);
+        this.addKeyListener(keyInput);
+		keyInput.runThreads();
         this.addMouseListener(this);
-
     }
 
     public static void main (String[] args) {
-		new ControleFrame();
-		while (true){
-			executaThread();
-			if(controle == true)
-				break;
-		}
+		new ControleFrame(); ;
 	}
 
-	public static void executaThread(){
-		jogador1.run();
-		jogador2.run();
-	}
     
 	public static Jogador1 getPlayUm() {
 		if (playUm == null){
@@ -89,12 +65,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	public static void setPlayDois(Jogador2 playDois) {
 		ControleFrame.playDois = playDois;
 	}
-	public static Runnable getJogador1(){
-		return jogador1;
-	}
-	public static Runnable getJogador2(){
-		return jogador2;
-	}
+
 
 	public static Personagem getPersonagem1(){
 		return personagemUm;
@@ -104,69 +75,16 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		return personagemDois;
 	}
 
-	public static void setAcao1(){
-		ControleFrame.acao1 = 0;
+
+	public static void setControle(GameState gs){
+		ControleFrame.controle = gs;
 	}
 
-	public static void setAcao2(){
-		ControleFrame.acao2 = 0;
+	public static GameState getControle()
+	{
+		return ControleFrame.controle;
 	}
 
-	public static void controleEventos1(int acao){
-		EventosJogador1.eventosJogador1(acao);
-	}
-
-	public static void controleEventos2(int acao){
-		EventosJogador2.eventosJogador2(acao);
-	}
-	public static void setControle(){
-		ControleFrame.controle = true;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-        //Eventos Jogador 1
-		if (e.getKeyCode() == KeyEvent.VK_D) {
-			acao1 = 1;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_A){
-			acao1 = 2;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_S) {
-			acao1 = 3;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_W){
-			acao1 = 4;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_Q){
-			acao1 = 5;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_E){
-			acao1 = 6;
-		}
-		//Eventos jogador dois
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			acao2 = 2;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			acao2 = 1;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			acao2 = 3;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_UP){
-			acao2 = 4;
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_SHIFT){
-			acao2 = 5;
-			repaint();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_SEMICOLON){
-			acao2 = 6;
-			repaint();
-		}
-		
-	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -211,8 +129,9 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 			System.out.println("Player 1 selecionado.");
 		}
 		else if (clique == 2){
+			System.out.println("Player 2 selecionado.");
 			this.setContentPane(TelaLuta.criarTela());
-			repaint();
+			setControle(GameState.INGAME);
 		}
 		
 
@@ -222,17 +141,6 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 	public void mousePressed(MouseEvent e) {
 	}
 
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -248,4 +156,7 @@ public class ControleFrame extends JFrame implements KeyListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
 }
