@@ -1,12 +1,8 @@
 package src.controle;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import src.visao.TelaIni;
 import src.visao.TelaLuta;
 
 public class EventosJogador2 implements Runnable {

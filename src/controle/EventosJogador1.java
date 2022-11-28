@@ -115,10 +115,12 @@ public class EventosJogador1 implements Runnable {
     }
 
     public static void chute() {
-        ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                ControleFrame.getPlayUm().getAndarSprite()));
+        ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + 2),
+        ControleFrame.getPlayUm().getY());
+
         colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(),
                 ControleFrame.getPersonagem1().getChute());
+                
         ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() - 2),
                         ControleFrame.getPlayUm().getY());
     }

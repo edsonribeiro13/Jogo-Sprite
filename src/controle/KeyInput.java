@@ -59,7 +59,7 @@ public class KeyInput extends KeyAdapter {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_P) {
 				new Thread(() -> {
-					ControleFrame.getPlayUm().soco();
+					ControleFrame.getPlayUm().chute();
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e1) {
