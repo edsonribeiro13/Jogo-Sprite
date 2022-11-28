@@ -2,9 +2,8 @@ package src.controle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-import src.visao.Jogador1;
-import src.visao.Jogador2;
 import src.visao.TelaLuta;
 
 public class EventosJogador1 implements Runnable {
@@ -44,43 +43,21 @@ public class EventosJogador1 implements Runnable {
                 if (getMovieDirection()[1]) {
                     if (ControleFrame.getPlayUm().getLocation().x < 720
                             && ControleFrame.getPlayUm().getLocation().x < (ControleFrame.getPlayDois().getLocation().x
-                                    - ControleFrame.getPlayDois().getWidth()))
+                                    - (ControleFrame.getPlayDois().getWidth()/2)))
                         ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x + 5,
                                 ControleFrame.getPlayUm().getLocation().y);
-                    if (ControleFrame.getPlayUm().getSprit_andar_control() >= 0
-                            && ControleFrame.getPlayUm().getSprit_andar_control() < 9) {
-                        ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                                Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
-                        ControleFrame.getPlayUm()
-                                .setSprit_andar_control(ControleFrame.getPlayUm().getSprit_andar_control() + 1);
-                    } else {
-
-                        ControleFrame.getPlayUm().setSprit_andar_control(0);
-                        ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                                Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
-
-                    }
+                    ControleFrame.getPlayUm().andar();
+                    
                 } else if (getMovieDirection()[3]) {
                     if (ControleFrame.getPlayUm().getLocation().x > 0)
                         ControleFrame.getPlayUm().setLocation(ControleFrame.getPlayUm().getLocation().x - 5,
                                 ControleFrame.getPlayUm().getLocation().y);
-                    if (ControleFrame.getPlayUm().getSprit_andar_control() >= 0
-                            && ControleFrame.getPlayUm().getSprit_andar_control() < 9) {
-                        ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                                Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
-                        ControleFrame.getPlayUm()
-                                .setSprit_andar_control(ControleFrame.getPlayUm().getSprit_andar_control() - 1);
-                    } else {
+                        ControleFrame.getPlayUm().andar();
 
-                        ControleFrame.getPlayUm().setSprit_andar_control(8);
-                        ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                                Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
-
-                    }
                 } else if (getMovieDirection()[0]) {
                     float vlc = 0;
 
-                    ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getPularSprite()));
+                    ControleFrame.getPlayUm().setIcon(new ImageIcon(ControleFrame.getPlayUm().getParadoSprite()));
 
                     for (int i = 0; i < 15; i++) {
                         try {
@@ -105,49 +82,13 @@ public class EventosJogador1 implements Runnable {
                             e1.printStackTrace();
                         }
                     }
-                    ControleFrame.getPlayUm().setSprit_andar_control(0);
-                    ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                            Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
+                    ControleFrame.getPlayUm().andar();
                 } else if (getMovieDirection()[4]) {
-                    float vlc = 0;
-                    for (int i = 0; i < 3; i++) {
-                        try {
-                            vlc += (10 * 0.0333333333333);
-                            ControleFrame.getPlayUm().setSprit_soco_controll(i);
-                            ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()[i]));
-                            ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + vlc),
-                                    ControleFrame.getPlayUm().getY());
-                            Thread.sleep(33);
-                        } catch (InterruptedException e1) {
-
-                            e1.printStackTrace();
-                        }
-                    }
-
-                    ControleFrame.getPlayUm().setSprit_andar_control(0);
-                    ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                            Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
                     soco();
                     movieDirection[4] = false;
                     setMovieDirection(movieDirection);
                 } else if (getMovieDirection()[5]) {
-                    float vlc = 0;
-                    for (int i = 0; i < 3; i++) {
-                        try {
-                            vlc += (10 * 0.0333333333333);
-                            ControleFrame.getPlayUm().setSprit_chute_control(i);
-                            ControleFrame.getPlayUm().setIcon(new ImageIcon(Jogador1.getSocarSprites()[i]));
-                            ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + vlc),
-                                    ControleFrame.getPlayUm().getY());
-                            Thread.sleep(33);
-                        } catch (InterruptedException e1) {
 
-                            e1.printStackTrace();
-                        }
-                    }
-                    ControleFrame.getPlayUm().setSprit_andar_control(0);
-                    ControleFrame.getPlayUm().setIcon(new ImageIcon(
-                            Jogador1.getAndarSprites()[ControleFrame.getPlayUm().getSprit_andar_control()]));
                     chute();
                     movieDirection[5] = false;
                     setMovieDirection(movieDirection);
@@ -162,15 +103,24 @@ public class EventosJogador1 implements Runnable {
 
     public static void soco() {
 
+        ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() + 2),
+        ControleFrame.getPlayUm().getY());
+
         colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(),
-                ControleFrame.getPersonagem1().getsoco());
+        ControleFrame.getPersonagem1().getsoco());
+
+        ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() - 2),
+        ControleFrame.getPlayUm().getY());
 
     }
 
     public static void chute() {
+        ControleFrame.getPlayUm().setIcon(new ImageIcon(
+                ControleFrame.getPlayUm().getAndarSprite()));
         colision_check(ControleFrame.getPlayUm(), ControleFrame.getPlayDois(),
                 ControleFrame.getPersonagem1().getChute());
-
+        ControleFrame.getPlayUm().setLocation(Math.round(ControleFrame.getPlayUm().getX() - 2),
+                        ControleFrame.getPlayUm().getY());
     }
 
     public static boolean colision_check(JLabel LA, JLabel LB, int forca) {
@@ -196,16 +146,10 @@ public class EventosJogador1 implements Runnable {
             TelaLuta.getLifebar2().setSize(TelaLuta.getLifebar2().getWidth() - forca,
                     TelaLuta.getLifebar2().getHeight());
             if (TelaLuta.getLifebar2().getWidth() <= 0) {
-                for (int i = 0; i < 3; i++) {
-                    try {
-                        ControleFrame.getPlayDois().setIcon(new ImageIcon(Jogador2.getMorteSprites()[i]));
-                        Thread.sleep(33);
-                    } catch (InterruptedException e1) {
-
-                        e1.printStackTrace();
-                    }
-                }
+                ControleFrame.getPlayDois().morrer();
                 ControleFrame.setControle(GameState.END);
+                JOptionPane.showMessageDialog(null, "Jogador 1 venceu!");
+                ControleFrame.resetTheGame(ControleFrame.getPlayDois());
             }
 
         }

@@ -10,13 +10,13 @@ public class TelaIni {
     
     private static BufferedImage imgBackground = new Utils.ImgUtils().scaleImage(800,150,"src//utils/UESB.jpeg");
     private static JLabel labelImgBackground = new JLabel();
-    private static BufferedImage imgPersonagem1 = new Utils.ImgUtils().scaleImage(100,100,"src//utils/P1Andar1.png");
+    private static String imgPersonagem1 = "src//utils//eagle//paradoP1.gif";
     private static JLabel label1 = new JLabel();
-    private static BufferedImage imgPersonagem2 = new Utils.ImgUtils().scaleImage(100,100,"src//utils/P2Andar1.png");
+    private static String imgPersonagem2 = "src//utils//raiden//paradoP2.gif";
     private static JLabel label2 = new JLabel();
-    private static BufferedImage imgPersonagem3 = new Utils.ImgUtils().scaleImage(100,100,"src//utils/P3Andar1.png");
+    private static String imgPersonagem3 = "src//utils//scorpion//paradoP1.gif";
     private static JLabel label3 = new JLabel();
-    private static BufferedImage imgPersonagem4 = new Utils.ImgUtils().scaleImage(100,100,"src//utils/P4Andar1.png");
+    private static String imgPersonagem4 = "src//utils//subzero//paradoP2.gif";
     private static JLabel label4 = new JLabel();
     private static JPanel panel = new JPanel();
 
@@ -41,16 +41,16 @@ public class TelaIni {
         label4.setIcon(new ImageIcon(imgPersonagem4));
 
         labelImgBackground.setBounds(0, 0, 800, 150);
-        label1.setBounds(300, 250, 100, 100);
-        label2.setBounds(410, 250, 100, 100);
-        label3.setBounds(300, 360, 100, 100);
-        label4.setBounds(410, 360, 100, 100);
+        label1.setBounds(250, 175, 170, 170);
+        label2.setBounds(410, 175, 170, 170);   
+        label3.setBounds(250, 360, 170, 170);
+        label4.setBounds(410, 360, 170, 170);
 
 
-        labelOverall1.setBounds(200, 250, 100, 100);
-        labelOverall2.setBounds(200, 350, 100, 100);
+        labelOverall1.setBounds(150, 250, 100, 100);
+        labelOverall2.setBounds(150, 400, 100, 100);
         labelOverall3.setBounds(530, 250, 100, 100);
-        labelOverall4.setBounds(530, 350, 100, 100);
+        labelOverall4.setBounds(530, 400, 100, 100);
 
         labelOverall1.setForeground(Color.RED);
         labelOverall2.setForeground(Color.RED);
